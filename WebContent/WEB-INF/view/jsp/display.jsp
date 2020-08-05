@@ -247,12 +247,25 @@ text-decoration:underline;
 <td>${historyvar.deadline__date}</td>
 <td>${coresponsePageList[status.index].coresponse_date}</td>
 <td>${coresponsePageList[status.index].coresponse_type}</td>
+
+<c:choose>
+<c:when test="${not empty coresponsePageList[status.index].undel_ind}">
 <td>${coresponsePageList[status.index].undel_ind}</td>
+</c:when>
+
+<c:when test="${not empty coresponsePageList[status.index].delivert_st}">
+<td>${coresponsePageList[status.index].delivert_st}</td>
+</c:when>
+
+<c:otherwise>
+<td>${coresponsePageList[status.index].letter_name}</td>
+</c:otherwise>
+</c:choose>
 <c:if test="${coresponsePageList[status.index].a_HREF_indicator == 1}">
  
  <td><a href="http://www.myweb.com/myweb1?${letterDto.print_name_prg}${letterDto.process_year_component}+ID+
- ${coresponsePageList[status.index].coresponse_date}+${coresponsePageList[status.index].recipient}+
- ${requestDto.location_id}+${letterDto.process_year}${coresponsePageList[status.index].recipient}${letterDto.letter_name}">Call Program</a></td>
+ ${coresponsePageList[status.index].coresponse_date}${coresponsePageList[status.index].recipient.length > 0 ? '+' : ''}${coresponsePageList[status.index].recipient}+
+ ${requestDto.location_id}+${letterDto.process_year}${coresponsePageList[status.index].recipient}${coresponsePageList[status.index].recipient.length > 0 ? ' ' : ''}${letterDto.letter_name}">Call Program</a></td>
   
   </c:if>
  </tr>
@@ -271,14 +284,27 @@ text-decoration:underline;
 <td>${historyPageList[status.index].deadline__date}</td>
 
 <td>${coresponsevar.coresponse_date}</td>
-<td>${coresponsePageList[status.index].coresponse_type}</td>
+<td>${coresponsevar.coresponse_type}</td>
+
+<c:choose>
+<c:when test="${not empty coresponsevar.undel_ind}">
 <td>${coresponsevar.undel_ind}</td>
+</c:when>
+
+<c:when test="${not empty coresponsevar.delivert_st}">
+<td>${coresponsevar.delivert_st}</td>
+</c:when>
+
+<c:otherwise>
+<td>${coresponsevar.letter_name}</td>
+</c:otherwise>
+</c:choose>
 
 <c:if test="${coresponsevar.a_HREF_indicator == 1}">
  
  <td><a href="http://www.myweb.com/myweb1?${letterDto.print_name_prg}${letterDto.process_year_component}+ID+
- ${coresponsePageList.coresponse_date}+${coresponsePageList.recipient}+
- ${requestDto.location_id}+${letterDto.process_year}${coresponsePageList.recipient}${letterDto.letter_name}">Call Program</a></td>
+ ${coresponsevar.coresponse_date}${coresponsevar.recipient.length > 0 ? '+' : ''}${coresponsevar.recipient}+
+ ${requestDto.location_id}+${letterDto.process_year}${coresponsevar.recipient}${coresponsevar.recipient.length > 0 ? ' ' : ''}${letterDto.letter_name}">Call Program</a></td>
   
   </c:if>
  </tr>
